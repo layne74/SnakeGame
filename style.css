@@ -60,11 +60,12 @@ html {
 }
 
 /* SNAKE STYLING =============================================*/
-/* Styling for the snake ALTER NAME*/
 
+/* Styling for the snake*/
 .snake {
     background-color: rgba(34, 51, 34, 255);
     border-radius: 8px;
+
 }
 .snakeHead_neutral {
     background-color: transparent;
@@ -102,10 +103,22 @@ html {
 /* Styling for the points div */
 .info {
     display: flex;
+    justify-content: space-between;
     padding: 10px 25px;
-    color: rgba(20, 37, 27, 255);
+    color: rgba(34, 51, 34, 255);
     font-weight: bold;
     font-size: 15px;
+}
+
+/* Score value styling*/
+.player-score {
+    display: flex;
+    color: rgba(34, 51, 34, 255);
+}
+
+.high-score {
+    display: flex;
+    color: rgba(34, 51, 34, 255);
 }
 
 /* Separator for points and game  */
@@ -115,15 +128,26 @@ html {
     border-bottom: 2px solid rgba(34, 51, 34, 255);
 }
 
-/* Score value styling */
-#score {
-    /* color: white; */
-    padding-left: 10px;
+#title-area {
+    display: flex;
+    justify-content: center;
+}
+
+#title {
+    padding: 20px;
+    color: rgba(34, 51, 34, 255);
+}
+
+.created {
+    display: flex;
+    justify-content: center;
 }
 
 .debug {
     border: 1px solid red;
 }
+
+
 
 
 

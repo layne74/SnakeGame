@@ -13,10 +13,10 @@ let gridSize = {
 };
 
 let snake = ["d3"];
-let foodLastLocations = [];
 let direction = "";
+let lastDirection = "";
 let foodItemSet = false;
-let score = 1;
+let score = 0;
 
 // change the speed of the game
 let tickRate = 0.2; // Seconds
@@ -30,66 +30,69 @@ function tick() {
 
 // Controls movement and user input for snake
 function move() {
-
-    console.log(snake);
-
-    let y = snake[snake.length - 1].split("")[0];
-    let x = snake[snake.length - 1].split("")[1];
-    let tail = snake[0];
-
-    // maintains the snakes length
-    if (snake.length > score) {
-        snake.shift();
-        // removes the "tail"
-        document.getElementById(`${tail}`).classList.remove("snake");
-        console.log("hit");
-    }
-
-    // RIGHT
-    if (direction == "ArrowRight") {
-        if (x > 7) {
-            snake.push(y + 1);
-        } else {
-            snake.push(y + (parseInt(x) + 1));
-        }
-
-    } // DOWN
-    else if (direction == "ArrowDown") {
-        if (y > "g") {
-            snake.push("a" + x);
-        } else {
-            snake.push(String.fromCharCode(y.charCodeAt(0) + 1) + x);
-        }
-    } // LEFT 
-    else if (direction == "ArrowLeft") {
-        if (x < 2) {
-            snake.push(y + 8);
-        } else {
-            snake.push(y + (parseInt(x) - 1));
-        }
-    } // UP
-    else if (direction == "ArrowUp") {
-        if (y < "b") {
-            snake.push("h" + x);
-        } else {
-            snake.push(String.fromCharCode(y.charCodeAt(0) - 1) + x);
-        }
-    }
-    
-
+    // Checks if a direction has been set
     if (direction != "") {
 
-        // Drawing the new head and removing the tail
+        // x and y co-ordinate and the tail position (stored before changed)
+        let y = snake[snake.length - 1].split("")[0];
+        let x = snake[snake.length - 1].split("")[1];
+        let tail = snake[0];
+
+        // maintains the snakes length
+        if (snake.length > score) {
+            //removes the tail from snake array
+            snake.shift();
+            // removes classes from the "tail"
+            document.getElementById(`${tail}`).classList.remove("snake", "snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
+        }
+
+        // RIGHT
+        if (direction == "ArrowRight") {
+            if (x > 7) {
+                snake.push(y + 1);
+            } else {
+                snake.push(y + (parseInt(x) + 1));
+            }
+
+        } // DOWN
+        else if (direction == "ArrowDown") {
+            if (y > "g") {
+                snake.push("a" + x);
+            } else {
+                snake.push(String.fromCharCode(y.charCodeAt(0) + 1) + x);
+            }
+        } // LEFT 
+        else if (direction == "ArrowLeft") {
+            if (x < 2) {
+                snake.push(y + 8);
+            } else {
+                snake.push(y + (parseInt(x) - 1));
+            }
+        } // UP
+        else if (direction == "ArrowUp") {
+            if (y < "b") {
+                snake.push("h" + x);
+            } else {
+                snake.push(String.fromCharCode(y.charCodeAt(0) - 1) + x);
+            }
+        }
+
+        // Drawing the new head
         document.getElementById(`${snake[snake.length - 1]}`).classList.add("snake", `${snakeHeadOrientation(direction)}`);
 
-        // Removes the head from the second block
-        document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
-        
+        // For if the game has just started
+        if (score > 0) {
+            // Removes the head from the second block
+            document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
+        }
 
         // Slices snake array excluding head, looks for head in it.
         if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
             death();
         }
+
+        // Update the previous direction
+        lastDirection = direction;
 
     }
 }
@@ -101,13 +104,13 @@ document.addEventListener("keydown", (event) => {
     // Check if a arrow key was pressed
     if (keyName == "ArrowRight" || keyName == "ArrowLeft" || keyName == "ArrowUp" || keyName == "ArrowDown") {
         // Stops the key being set if it is opposite of what is currently set
-        if (keyName == "ArrowRight" && direction != "ArrowLeft") {
+        if (keyName == "ArrowRight" && lastDirection != "ArrowLeft") {
             direction = keyName;
-        } else if (keyName == "ArrowLeft" && direction != "ArrowRight") {
+        } else if (keyName == "ArrowLeft" && lastDirection != "ArrowRight") {
             direction = keyName;
-        } else if (keyName == "ArrowUp" && direction != "ArrowDown") {
+        } else if (keyName == "ArrowUp" && lastDirection != "ArrowDown") {
             direction = keyName;
-        } else if (keyName == "ArrowDown" && direction != "ArrowUp") {
+        } else if (keyName == "ArrowDown" && lastDirection != "ArrowUp") {
             direction = keyName;
         }
     }
@@ -160,7 +163,6 @@ function snakeHeadOrientation(orientation) {
     }
 }
 
-
 // Interval for tickrate
 let ticker = setInterval(() => {
     tick();
@@ -169,13 +171,31 @@ let ticker = setInterval(() => {
 function death() {
     alert("Oh no, You died!");
     snake = ["d3"];
-    foodLastLocations = [];
     direction = "";
     foodItemSet = false;
-    score = 1;
+    score = 0;
+    clearGrid();
+    updateScore();
 }
 
+// Selects the entire grid, removes all snake related classes
 function clearGrid() {
-
+    let wholeGrid = document.querySelectorAll('.grid-location');
+    wholeGrid.forEach(element => {
+        element.classList.remove(
+            "snake",
+            "snakeHead_up",
+            "snakeHead_down",
+            "snakeHead_left",
+            "snakeHead_right",
+            "snakeHead_neutral",
+            "food"
+        )
+        // Sets default position for the snake.
+        document.getElementById('d3').classList.add("snake", "snakeHead_neutral");
+    });
 }
 
+function setHighScore() {
+    // TODO
+}
