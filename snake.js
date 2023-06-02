@@ -12,84 +12,78 @@ let gridSize = {
     xEnd: "8",
 };
 
-let snake = ["d3", "c3", "b3", "a3", "e3"];
+let snake = ["d3"];
 let foodLastLocations = [];
-let direction = "ArrowDown";
+let direction = "";
 let foodItemSet = false;
-let score = 0;
+let score = 1;
 
+// change the speed of the game
 let tickRate = 0.2; // Seconds
 
 function tick() {
-    // let headLocation = document.getElementsByClassName("snakeHead")[0].id;
+
     move();
-    makeFood()
-    console.log(foodLastLocations);
-    // console.log(score);
+    makeFood();
+
 }
 
 // Controls movement and user input for snake
 function move() {
-    snake.forEach(location => {
-        document.getElementById(`${location}`).classList.remove("snakeHead")
-    });
-    // Update snake body by shifting values to the left
-    for (let i = snake.length - 1; i > 0; i--) {
-        snake[i] = snake[i - 1];
-    }
 
-    let y = snake[0].split("")[0];
-    let x = snake[0].split("")[1];
+    let y = snake[snake.length - 1].split("")[0];
+    let x = snake[snake.length - 1].split("")[1];
+    let tail = snake[0];
+
     // RIGHT
     if (direction == "ArrowRight") {
         if (x > 7) {
-            snake[0] = y + 1;
+            snake.push(y + 1);
         } else {
-            snake[0] = y + (parseInt(x) + 1);
+            snake.push(y + (parseInt(x) + 1));
         }
-        
+
     } // DOWN
     else if (direction == "ArrowDown") {
         if (y > "g") {
-            snake[0] = "a" + x;
+            snake.push("a" + x);
         } else {
-            snake[0] = String.fromCharCode(y.charCodeAt(0) + 1) + x;
+            snake.push(String.fromCharCode(y.charCodeAt(0) + 1) + x);
         }
     } // LEFT 
     else if (direction == "ArrowLeft") {
         if (x < 2) {
-            snake[0] = y + 8;
+            snake.push(y + 8);
         } else {
-            snake[0] = y + (parseInt(x) - 1);
+            snake.push(y + (parseInt(x) - 1));
         }
     } // UP
     else if (direction == "ArrowUp") {
         if (y < "b") {
-            snake[0] = "h" + x;
+            snake.push("h" + x);
         } else {
-            snake[0] = String.fromCharCode(y.charCodeAt(0) - 1) + x;
+            snake.push(String.fromCharCode(y.charCodeAt(0) - 1) + x);
         }
     }
-    
-    let tail = snake[snake.length - 1];
 
-    if (foodLastLocations.length > 0) {
-        if (tail == foodLastLocations[0]) {
-            snake.push(foodLastLocations[0]);
-            foodLastLocations.shift();
+    if (direction != "") {
+        // Drawing the new head and removing the tail
+        document.getElementById(`${snake[snake.length - 1]}`).classList.add("snakeHead");
+
+        // SLices snake array excluding head, looks for head in it.
+        if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
+            alert("LOSER");
+            clearInterval(ticker);
         }
-        
-    } else {
-        
+
+        // maintains the snakes length
+        if (snake.length > score) {
+            snake.shift();
+        }
+
+        // removes the "tail"
+        document.getElementById(`${tail}`).classList.remove("snakeHead");
     }
-
-    // Drawing the new head and removing the tail
-    // document.getElementById(`${tail}`).classList.remove("snakeHead");
-    // document.getElementById(`${snake[0]}`).classList.add("snakeHead");
-
-    snake.forEach(location => {
-        document.getElementById(`${location}`).classList.add("snakeHead")
-    });
 }
 
 // Listens for key presses
@@ -113,33 +107,39 @@ document.addEventListener("keydown", (event) => {
 
 // Function to randomize a grid position and apply a food class
 function makeFood() {
-    // Returns a random integer from 1 to 10:
-    let xPos = Math.floor(Math.random() * gridSize.xEnd) + 1;
-
-    // Returns a random integer from 1 to 10:
-    let yPos = String.fromCharCode(Math.floor(Math.random() * gridSize.xEnd) + 97);
-
-    let gridPos = yPos + xPos;
 
     if (!foodItemSet) {
+        // Returns a random integer from 1 to 10:
+        let xPos = Math.floor(Math.random() * gridSize.xEnd) + 1;
+
+        // Returns a random integer from 1 to 10:
+        let yPos = String.fromCharCode(Math.floor(Math.random() * gridSize.xEnd) + 97);
+        let gridPos = yPos + xPos;
+
+        // Finds the position on the grid and adds the food class
+        // and changes food state to true
         document.getElementById(`${gridPos}`).classList.add("food");
-        foodItemSet = true
+        foodItemSet = true;
     }
 
+    // If the food block has the "snakeHead" class, the class is removed, 
+    // food state set to false, the score is updated and refreshed on screen
     if (document.querySelector(`.food`).classList.contains("snakeHead")) {
         let foodLoc = document.querySelector(`.food`);
         foodLoc.classList.remove("food");
         foodItemSet = false;
-        foodLastLocations.push(foodLoc.id);
         score++;
-        
+        updateScore();
     }
 
-    
 }
 
+// Change the score value on screen
+function updateScore() {
+    document.getElementById("score").innerHTML = score;
+}
 
 // Interval for tickrate
-setInterval(() => {
+let ticker = setInterval(() => {
     tick();
 }, tickRate * 1000);
