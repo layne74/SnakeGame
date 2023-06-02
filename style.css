@@ -1,7 +1,7 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Press Start 2P', cursive;
     text-shadow: 0 0 10px #bd7f7f2d, 0 0 20px #00310731, 0 0 42px rgba(0, 44, 4, 0.212), 0 0 82px rgba(0, 0, 0, 0.151),0 0 92px rgba(0, 0, 0, 0.26);
 }
 
@@ -16,8 +16,9 @@ html {
             rgba(0, 0, 0, 0.7) 150%);
     background-color: rgba(143, 179, 145, 255);
     width: 500px;
-    margin: 0 auto;
+    margin: 15px auto;
     border: 2px solid rgba(34, 51, 34, 255);
+    border-radius: 10px;
 }
 
 /* Div for the actual grid */
@@ -58,11 +59,45 @@ html {
     background-image: url(/images/cherry-icon-old.png);
 }
 
+/* SNAKE STYLING =============================================*/
 /* Styling for the snake ALTER NAME*/
-.snakeHead {
+
+.snake {
     background-color: rgba(34, 51, 34, 255);
     border-radius: 8px;
 }
+.snakeHead_neutral {
+    background-color: transparent;
+    background-size: 65px;
+    background-image: url(/images/head.png);
+}
+.snakeHead_up {
+    background-color: transparent;
+    background-size: 65px;
+    background-image: url(/images/head.png);
+    transform: rotate(0deg);
+}
+.snakeHead_down {
+    background-color: transparent;
+    background-size: 65px;
+    background-image: url(/images/head.png);
+    transform: rotate(180deg);
+}
+.snakeHead_left {
+    background-color: transparent;
+    background-size: 65px;
+    background-image: url(/images/head.png);
+    transform: rotate(-90deg);
+}
+
+.snakeHead_right {
+    background-color: transparent;
+    background-size: 65px;
+    background-image: url(/images/head.png);
+    transform: rotate(90deg);
+}
+
+/* ========================================== SNAKE STYLING */
 
 /* Styling for the points div */
 .info {
@@ -70,7 +105,7 @@ html {
     padding: 10px 25px;
     color: rgba(20, 37, 27, 255);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 /* Separator for points and game  */
@@ -83,5 +118,49 @@ html {
 /* Score value styling */
 #score {
     /* color: white; */
-    padding-left: 15px;
+    padding-left: 10px;
 }
+
+.debug {
+    border: 1px solid red;
+}
+
+
+
+
+/* OLD */
+/* .snakeHead_neutral {
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(/images/eyes.png);
+}
+.snakeHead_up {
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: url(/images/eyes.png);
+    transform: rotate(0deg);
+}
+.snakeHead_down {
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: url(/images/eyes.png);
+    transform: rotate(180deg);
+}
+.snakeHead_left {
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: url(/images/eyes.png);
+    transform: rotate(-90deg);
+}
+
+.snakeHead_right {
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: url(/images/eyes.png);
+    transform: rotate(90deg);
+} */
