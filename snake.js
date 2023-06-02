@@ -31,9 +31,19 @@ function tick() {
 // Controls movement and user input for snake
 function move() {
 
+    console.log(snake);
+
     let y = snake[snake.length - 1].split("")[0];
     let x = snake[snake.length - 1].split("")[1];
     let tail = snake[0];
+
+    // maintains the snakes length
+    if (snake.length > score) {
+        snake.shift();
+        // removes the "tail"
+        document.getElementById(`${tail}`).classList.remove("snake");
+        console.log("hit");
+    }
 
     // RIGHT
     if (direction == "ArrowRight") {
@@ -65,27 +75,22 @@ function move() {
             snake.push(String.fromCharCode(y.charCodeAt(0) - 1) + x);
         }
     }
+    
 
     if (direction != "") {
-        const oldDirection = direction;
+
         // Drawing the new head and removing the tail
         document.getElementById(`${snake[snake.length - 1]}`).classList.add("snake", `${snakeHeadOrientation(direction)}`);
-        // document.getElementById(`${snake[snake.length - 1]}`).classList.add("snakeHead");
-        console.log(document.getElementById(`${snake[snake.length - 2]}`).id);
+
+        // Removes the head from the second block
         document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
+        
 
         // Slices snake array excluding head, looks for head in it.
         if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
             death();
         }
 
-        // maintains the snakes length
-        if (snake.length > score) {
-            snake.shift();
-        }
-
-        // removes the "tail"
-        document.getElementById(`${tail}`).classList.remove("snake");
     }
 }
 
