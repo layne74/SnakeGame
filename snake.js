@@ -67,13 +67,16 @@ function move() {
     }
 
     if (direction != "") {
+        const oldDirection = direction;
         // Drawing the new head and removing the tail
-        document.getElementById(`${snake[snake.length - 1]}`).classList.add("snakeHead");
+        document.getElementById(`${snake[snake.length - 1]}`).classList.add("snake", `${snakeHeadOrientation(direction)}`);
+        // document.getElementById(`${snake[snake.length - 1]}`).classList.add("snakeHead");
+        console.log(document.getElementById(`${snake[snake.length - 2]}`).id);
+        document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
 
-        // SLices snake array excluding head, looks for head in it.
+        // Slices snake array excluding head, looks for head in it.
         if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
-            alert("LOSER");
-            clearInterval(ticker);
+            death();
         }
 
         // maintains the snakes length
@@ -82,7 +85,7 @@ function move() {
         }
 
         // removes the "tail"
-        document.getElementById(`${tail}`).classList.remove("snakeHead");
+        document.getElementById(`${tail}`).classList.remove("snake");
     }
 }
 
@@ -124,7 +127,7 @@ function makeFood() {
 
     // If the food block has the "snakeHead" class, the class is removed, 
     // food state set to false, the score is updated and refreshed on screen
-    if (document.querySelector(`.food`).classList.contains("snakeHead")) {
+    if (document.querySelector(`.food`).classList.contains("snake")) {
         let foodLoc = document.querySelector(`.food`);
         foodLoc.classList.remove("food");
         foodItemSet = false;
@@ -139,7 +142,35 @@ function updateScore() {
     document.getElementById("score").innerHTML = score;
 }
 
+function snakeHeadOrientation(orientation) {
+
+    if (orientation == "ArrowUp") {
+        return "snakeHead_up"
+    } else if (orientation == "ArrowDown") {
+        return "snakeHead_down"
+    } else if (orientation == "ArrowLeft") {
+        return "snakeHead_left"
+    } else if (orientation == "ArrowRight") {
+        return "snakeHead_right"
+    }
+}
+
+
 // Interval for tickrate
 let ticker = setInterval(() => {
     tick();
 }, tickRate * 1000);
+
+function death() {
+    alert("Oh no, You died!");
+    snake = ["d3"];
+    foodLastLocations = [];
+    direction = "";
+    foodItemSet = false;
+    score = 1;
+}
+
+function clearGrid() {
+
+}
+

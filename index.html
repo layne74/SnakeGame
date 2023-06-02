@@ -4,95 +4,102 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Snake</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <div class="mainDiv">
-            <div class="info">
-                <p>Score: </p>
-                <p id="score">1</p>
-            </div>
-            <div class="line"></div>
-            <div class="container">
-                <div class="grid-location" id="a1"></div>
-                <div class="grid-location" id="a2"></div>
-                <div class="grid-location" id="a3"></div>
-                <div class="grid-location" id="a4"></div>
-                <div class="grid-location" id="a5"></div>
-                <div class="grid-location" id="a6"></div>
-                <div class="grid-location" id="a7"></div>
-                <div class="grid-location" id="a8"></div>
-    
-                <div class="grid-location" id="b1"></div>
-                <div class="grid-location" id="b2"></div>
-                <div class="grid-location" id="b3"></div>
-                <div class="grid-location" id="b4"></div>
-                <div class="grid-location" id="b5"></div>
-                <div class="grid-location" id="b6"></div>
-                <div class="grid-location" id="b7"></div>
-                <div class="grid-location" id="b8"></div>
-    
-                <div class="grid-location" id="c1"></div>
-                <div class="grid-location" id="c2"></div>
-                <div class="grid-location" id="c3"></div>
-                <div class="grid-location" id="c4"></div>
-                <div class="grid-location" id="c5"></div>
-                <div class="grid-location" id="c6"></div>
-                <div class="grid-location" id="c7"></div>
-                <div class="grid-location" id="c8"></div>
-    
-                <div class="grid-location" id="d1"></div>
-                <div class="grid-location" id="d2"></div>
-                <div class="grid-location snakeHead" id="d3"></div>
-                <div class="grid-location" id="d4"></div>
-                <div class="grid-location" id="d5"></div>
-                <div class="grid-location" id="d6"></div>
-                <div class="grid-location" id="d7"></div>
-                <div class="grid-location" id="d8"></div>
-    
-                <div class="grid-location" id="e1"></div>
-                <div class="grid-location" id="e2"></div>
-                <div class="grid-location" id="e3"></div>
-                <div class="grid-location" id="e4"></div>
-                <div class="grid-location" id="e5"></div>
-                <div class="grid-location" id="e6"></div>
-                <div class="grid-location" id="e7"></div>
-                <div class="grid-location" id="e8"></div>
-    
-                <div class="grid-location" id="f1"></div>
-                <div class="grid-location" id="f2"></div>
-                <div class="grid-location" id="f3"></div>
-                <div class="grid-location" id="f4"></div>
-                <div class="grid-location" id="f5"></div>
-                <div class="grid-location" id="f6"></div>
-                <div class="grid-location" id="f7"></div>
-                <div class="grid-location" id="f8"></div>
-    
-                <div class="grid-location" id="g1"></div>
-                <div class="grid-location" id="g2"></div>
-                <div class="grid-location" id="g3"></div>
-                <div class="grid-location" id="g4"></div>
-                <div class="grid-location" id="g5"></div>
-                <div class="grid-location" id="g6"></div>
-                <div class="grid-location" id="g7"></div>
-                <div class="grid-location" id="g8"></div>
-                
-                <div class="grid-location" id="h1"></div>
-                <div class="grid-location" id="h2"></div>
-                <div class="grid-location" id="h3"></div>
-                <div class="grid-location" id="h4"></div>
-                <div class="grid-location" id="h5"></div>
-                <div class="grid-location" id="h6"></div>
-                <div class="grid-location" id="h7"></div>
-                <div class="grid-location" id="h8"></div>
-            </div>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snake</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="mainDiv">
+        <div class="info">
+            <p>Score: </p>
+            <p id="score">1</p>
         </div>
-        <script src="snake.js" async defer></script>
-    </body>
+        <div class="line"></div>
+        <div class="container">
+            <div class="grid-location" id="a1"></div>
+            <div class="grid-location" id="a2"></div>
+            <div class="grid-location" id="a3"></div>
+            <div class="grid-location" id="a4"></div>
+            <div class="grid-location" id="a5"></div>
+            <div class="grid-location" id="a6"></div>
+            <div class="grid-location" id="a7"></div>
+            <div class="grid-location" id="a8"></div>
+
+            <div class="grid-location" id="b1"></div>
+            <div class="grid-location" id="b2"></div>
+            <div class="grid-location" id="b3"></div>
+            <div class="grid-location" id="b4"></div>
+            <div class="grid-location" id="b5"></div>
+            <div class="grid-location" id="b6"></div>
+            <div class="grid-location" id="b7"></div>
+            <div class="grid-location" id="b8"></div>
+
+            <div class="grid-location" id="c1"></div>
+            <div class="grid-location" id="c2"></div>
+            <div class="grid-location" id="c3"></div>
+            <div class="grid-location" id="c4"></div>
+            <div class="grid-location" id="c5"></div>
+            <div class="grid-location" id="c6"></div>
+            <div class="grid-location" id="c7"></div>
+            <div class="grid-location" id="c8"></div>
+
+            <div class="grid-location" id="d1"></div>
+            <div class="grid-location" id="d2"></div>
+            <div class="grid-location snake snakeHead_neutral" id="d3"></div>
+            <div class="grid-location" id="d4"></div>
+            <div class="grid-location" id="d5"></div>
+            <div class="grid-location" id="d6"></div>
+            <div class="grid-location" id="d7"></div>
+            <div class="grid-location" id="d8"></div>
+
+            <div class="grid-location" id="e1"></div>
+            <div class="grid-location" id="e2"></div>
+            <div class="grid-location" id="e3"></div>
+            <div class="grid-location" id="e4"></div>
+            <div class="grid-location" id="e5"></div>
+            <div class="grid-location" id="e6"></div>
+            <div class="grid-location" id="e7"></div>
+            <div class="grid-location" id="e8"></div>
+
+            <div class="grid-location" id="f1"></div>
+            <div class="grid-location" id="f2"></div>
+            <div class="grid-location" id="f3"></div>
+            <div class="grid-location" id="f4"></div>
+            <div class="grid-location" id="f5"></div>
+            <div class="grid-location" id="f6"></div>
+            <div class="grid-location" id="f7"></div>
+            <div class="grid-location" id="f8"></div>
+
+            <div class="grid-location" id="g1"></div>
+            <div class="grid-location" id="g2"></div>
+            <div class="grid-location" id="g3"></div>
+            <div class="grid-location" id="g4"></div>
+            <div class="grid-location" id="g5"></div>
+            <div class="grid-location" id="g6"></div>
+            <div class="grid-location" id="g7"></div>
+            <div class="grid-location" id="g8"></div>
+
+            <div class="grid-location" id="h1"></div>
+            <div class="grid-location" id="h2"></div>
+            <div class="grid-location" id="h3"></div>
+            <div class="grid-location" id="h4"></div>
+            <div class="grid-location" id="h5"></div>
+            <div class="grid-location" id="h6"></div>
+            <div class="grid-location" id="h7"></div>
+            <div class="grid-location" id="h8"></div>
+        </div>
+    </div>
+
+    <script src="snake.js" async defer></script>
+</body>
+
 </html>
