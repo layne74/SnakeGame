@@ -5,6 +5,8 @@ Date: 06/01/2023
 Incomplete: true
 */
 
+// Win = 64pts
+
 let gridSize = {
     xStart: "a",
     xEnd: "g",
@@ -17,15 +19,22 @@ let direction = "";
 let lastDirection = "";
 let foodItemSet = false;
 let score = 0;
+let highScore = 0;
+let foodArr = [
+    "apple-icon-old.png", 
+    "apple-icon-old.png", 
+    "grapes-icon-old.png"
+];
 
 // change the speed of the game
-let tickRate = 0.2; // Seconds
+let tickRate = 0.5; // Seconds
+
+// Checks/sets the high score
+setHighScore()
 
 function tick() {
-
     move();
     makeFood();
-
 }
 
 // Controls movement and user input for snake
@@ -43,7 +52,7 @@ function move() {
             //removes the tail from snake array
             snake.shift();
             // removes classes from the "tail"
-            document.getElementById(`${tail}`).classList.remove("snake", "snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
+            document.getElementById(`${tail}`).classList.remove("tail", "snake", "snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
         }
 
         // RIGHT
@@ -75,6 +84,11 @@ function move() {
             } else {
                 snake.push(String.fromCharCode(y.charCodeAt(0) - 1) + x);
             }
+        }
+
+        // Adds the tail class to the last item it there is more than 1 point
+        if (score >= 1) {
+            document.getElementById(`${snake[0]}`).classList.add("tail");
         }
 
         // Drawing the new head
@@ -118,7 +132,6 @@ document.addEventListener("keydown", (event) => {
 
 // Function to randomize a grid position and apply a food class
 function makeFood() {
-
     if (!foodItemSet) {
         // Returns a random integer from 1 to 10:
         let xPos = Math.floor(Math.random() * gridSize.xEnd) + 1;
@@ -130,6 +143,8 @@ function makeFood() {
         // Finds the position on the grid and adds the food class
         // and changes food state to true
         document.getElementById(`${gridPos}`).classList.add("food");
+        document.getElementById(`${gridPos}`).style.backgroundImage = randomFoodImage(); /////// TESTING
+
         foodItemSet = true;
     }
 
@@ -138,20 +153,21 @@ function makeFood() {
     if (document.querySelector(`.food`).classList.contains("snake")) {
         let foodLoc = document.querySelector(`.food`);
         foodLoc.classList.remove("food");
+        foodLoc.style.removeProperty('background-image');
         foodItemSet = false;
         score++;
         updateScore();
     }
-
 }
 
 // Change the score value on screen
 function updateScore() {
-    document.getElementById("score").innerHTML = score;
+    document.getElementById("score").innerHTML = formatScore(score);
+    setHighScore();
 }
 
+// Based on the headed direction, a class name is returned
 function snakeHeadOrientation(orientation) {
-
     if (orientation == "ArrowUp") {
         return "snakeHead_up"
     } else if (orientation == "ArrowDown") {
@@ -168,12 +184,13 @@ let ticker = setInterval(() => {
     tick();
 }, tickRate * 1000);
 
+// Alerts the suer of their demise, resets the game
 function death() {
     alert("Oh no, You died!");
     snake = ["d3"];
     direction = "";
     foodItemSet = false;
-    score = 0;
+    score = "000";
     clearGrid();
     updateScore();
 }
@@ -189,13 +206,47 @@ function clearGrid() {
             "snakeHead_left",
             "snakeHead_right",
             "snakeHead_neutral",
-            "food"
-        )
-        // Sets default position for the snake.
-        document.getElementById('d3').classList.add("snake", "snakeHead_neutral");
+            "food",
+            "tail"
+        );
+        element.style.removeProperty('background-image');
     });
+    // Sets default position for the snake.
+    document.getElementById('d3').classList.add("snake", "snakeHead_neutral");
 }
 
+// Sets the high score. Stored in local storage.
 function setHighScore() {
-    // TODO
+    let storedHighScore = localStorage.getItem("snakeHighScore");
+
+    if (storedHighScore) {
+        highScore = storedHighScore;
+    }
+
+    if (parseInt(score) > parseInt(highScore)) {
+        highScore = score;
+        localStorage.setItem("snakeHighScore", formatScore(highScore));
+    }
+
+    document.getElementById("high-score").innerHTML = formatScore(highScore);
+}
+
+// Resets the high score
+function resetHighScore() {
+    localStorage.setItem("snakeHighScore", "000");
+    document.getElementById("high-score").innerHTML = "000";
+}
+
+// Takes in int, adds padding 000, returns string
+function formatScore(num) {
+    let scoreIn = num.toString()
+    let formattedScore = ('000' + scoreIn).substring(scoreIn.length);
+    return formattedScore;
+}
+
+// Picks a random index in the array of image names, returns a string url(/path/to/file)
+function randomFoodImage() {
+    let idx = Math.floor(Math.random() * foodArr.length-1) + 1;
+
+    return `url(/images/food/${foodArr[idx]})`;
 }

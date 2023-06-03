@@ -40,68 +40,62 @@ html {
         ". . . . . . . .";
 }
 
-/* Dead */
-.grid-location {
-    /* background-color: rgba(143,179,145,255); */
-    /* border: 1px solid black; */
-}
-
-/* Dead */
-.body-location {
-    background-color: rgba(20, 37, 27, 255);
-}
-
 /* Styling for the food */
 .food {
     background-size: 35px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(/images/cherry-icon-old.png);
+    background-image: none;
 }
+
 
 /* SNAKE STYLING =============================================*/
 
 /* Styling for the snake*/
 .snake {
     background-color: rgba(34, 51, 34, 255);
-    border-radius: 8px;
-
+    border-radius: 10px;
+    background-position: center;
+    background-size: 63px;
 }
 .snakeHead_neutral {
     background-color: transparent;
-    background-size: 65px;
     background-image: url(/images/head.png);
 }
 .snakeHead_up {
     background-color: transparent;
-    background-size: 65px;
     background-image: url(/images/head.png);
     transform: rotate(0deg);
 }
 .snakeHead_down {
     background-color: transparent;
-    background-size: 65px;
     background-image: url(/images/head.png);
     transform: rotate(180deg);
 }
 .snakeHead_left {
     background-color: transparent;
-    background-size: 65px;
     background-image: url(/images/head.png);
     transform: rotate(-90deg);
 }
 
 .snakeHead_right {
     background-color: transparent;
-    background-size: 65px;
     background-image: url(/images/head.png);
     transform: rotate(90deg);
+}
+
+.tail {
+    background-color: rgba(34, 51, 34, 0.6);
+    background-image: url(/images/tail.png);
+    background-size: 120px;
+    border: 2px solid rgba(34, 51, 34, 255);
 }
 
 /* ========================================== SNAKE STYLING */
 
 /* Styling for the points div */
 .info {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 10px 25px;
@@ -114,6 +108,21 @@ html {
 .player-score {
     display: flex;
     color: rgba(34, 51, 34, 255);
+}
+
+.refreshHighScore {
+    position: absolute;
+    top: 3px;
+    right: 232px;
+    font-size: 23px;
+    padding-right: 10px;
+    color: rgba(34, 51, 34, 0.493); 
+    transition: color 0.15s;
+}
+
+.refreshHighScore:hover {
+    color: rgba(34, 51, 34, 1); 
+    cursor: pointer;
 }
 
 .high-score {
@@ -139,52 +148,12 @@ html {
 }
 
 .created {
+    font-size: 10px;
     display: flex;
     justify-content: center;
+    color: rgba(128, 128, 128, 0.507);
 }
 
 .debug {
     border: 1px solid red;
 }
-
-
-
-
-
-
-/* OLD */
-/* .snakeHead_neutral {
-    background-size: 35px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url(/images/eyes.png);
-}
-.snakeHead_up {
-    background-size: 35px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: url(/images/eyes.png);
-    transform: rotate(0deg);
-}
-.snakeHead_down {
-    background-size: 35px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: url(/images/eyes.png);
-    transform: rotate(180deg);
-}
-.snakeHead_left {
-    background-size: 35px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: url(/images/eyes.png);
-    transform: rotate(-90deg);
-}
-
-.snakeHead_right {
-    background-size: 35px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: url(/images/eyes.png);
-    transform: rotate(90deg);
-} */
