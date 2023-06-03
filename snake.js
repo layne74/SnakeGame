@@ -21,13 +21,13 @@ let foodItemSet = false;
 let score = 0;
 let highScore = 0;
 let foodArr = [
-    "apple-icon-old.png", 
-    "apple-icon-old.png", 
+    "apple-icon-old.png",
+    "cherry-icon-old.png",
     "grapes-icon-old.png"
 ];
 
 // change the speed of the game
-let tickRate = 0.5; // Seconds
+let tickRate = 0.23; // Seconds
 
 // Checks/sets the high score
 setHighScore()
@@ -35,6 +35,7 @@ setHighScore()
 function tick() {
     move();
     makeFood();
+    checkGameStatus();
 }
 
 // Controls movement and user input for snake
@@ -100,11 +101,6 @@ function move() {
             document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
         }
 
-        // Slices snake array excluding head, looks for head in it.
-        if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
-            death();
-        }
-
         // Update the previous direction
         lastDirection = direction;
 
@@ -132,13 +128,20 @@ document.addEventListener("keydown", (event) => {
 
 // Function to randomize a grid position and apply a food class
 function makeFood() {
+    let gridPos;
     if (!foodItemSet) {
-        // Returns a random integer from 1 to 10:
-        let xPos = Math.floor(Math.random() * gridSize.xEnd) + 1;
+        while (true) {
+            // Returns a random integer from 0 to 8:
+            let xPos = Math.floor(Math.random() * gridSize.xEnd) + 1;
 
-        // Returns a random integer from 1 to 10:
-        let yPos = String.fromCharCode(Math.floor(Math.random() * gridSize.xEnd) + 97);
-        let gridPos = yPos + xPos;
+            // Returns a random string from a to g:
+            let yPos = String.fromCharCode(Math.floor(Math.random() * gridSize.xEnd) + 97);
+            gridPos = yPos + xPos;
+
+            if (!snake.includes(gridPos)) {
+                break;
+            }
+        }
 
         // Finds the position on the grid and adds the food class
         // and changes food state to true
@@ -187,16 +190,16 @@ let ticker = setInterval(() => {
 // Alerts the suer of their demise, resets the game
 function death() {
     alert("Oh no, You died!");
-    snake = ["d3"];
-    direction = "";
-    foodItemSet = false;
-    score = "000";
-    clearGrid();
-    updateScore();
+    resetGame();
+}
+
+function win() {
+    alert("Oh yes, You won!");
+    resetGame();
 }
 
 // Selects the entire grid, removes all snake related classes
-function clearGrid() {
+function resetGame() {
     let wholeGrid = document.querySelectorAll('.grid-location');
     wholeGrid.forEach(element => {
         element.classList.remove(
@@ -211,6 +214,13 @@ function clearGrid() {
         );
         element.style.removeProperty('background-image');
     });
+
+    snake = ["d3"];
+    direction = "";
+    foodItemSet = false;
+    score = "000";
+    updateScore();
+
     // Sets default position for the snake.
     document.getElementById('d3').classList.add("snake", "snakeHead_neutral");
 }
@@ -219,15 +229,18 @@ function clearGrid() {
 function setHighScore() {
     let storedHighScore = localStorage.getItem("snakeHighScore");
 
+    // If there is a highscore in storage, set it in the game
     if (storedHighScore) {
         highScore = storedHighScore;
     }
 
+    // if the current score is higher than the high score, update it in the game and in storage
     if (parseInt(score) > parseInt(highScore)) {
         highScore = score;
         localStorage.setItem("snakeHighScore", formatScore(highScore));
     }
 
+    // Display the highscore
     document.getElementById("high-score").innerHTML = formatScore(highScore);
 }
 
@@ -246,7 +259,18 @@ function formatScore(num) {
 
 // Picks a random index in the array of image names, returns a string url(/path/to/file)
 function randomFoodImage() {
-    let idx = Math.floor(Math.random() * foodArr.length-1) + 1;
+    let idx = Math.floor(Math.random() * foodArr.length - 1) + 1;
 
     return `url(/images/food/${foodArr[idx]})`;
+}
+
+// Function that checks for death of for win
+function checkGameStatus() {
+    // Slices snake array excluding head, looks for head in it.
+    if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
+        death();
+    }
+    if (score == 64) {
+        win();
+    }
 }

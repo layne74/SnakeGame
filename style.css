@@ -1,3 +1,8 @@
+:root {
+    --foreground: rgba(34, 51, 34, 1);
+    --background: rgba(143, 179, 145, 1);
+  }
+
 * {
     padding: 0px;
     margin: 0px;
@@ -14,10 +19,10 @@ html {
     background: -webkit-radial-gradient(rgba(127, 127, 127, 0.5),
             rgba(127, 127, 127, 0.5) 30%,
             rgba(0, 0, 0, 0.7) 150%);
-    background-color: rgba(143, 179, 145, 255);
+    background-color: var(--background);
     width: 500px;
     margin: 15px auto;
-    border: 2px solid rgba(34, 51, 34, 255);
+    border: 2px solid var(--foreground);
     border-radius: 10px;
 }
 
@@ -53,7 +58,7 @@ html {
 
 /* Styling for the snake*/
 .snake {
-    background-color: rgba(34, 51, 34, 255);
+    background-color: var(--foreground);
     border-radius: 10px;
     background-position: center;
     background-size: 63px;
@@ -85,10 +90,10 @@ html {
 }
 
 .tail {
-    background-color: rgba(34, 51, 34, 0.6);
+    background-color: rgba(34, 51, 34, 0.5);
     background-image: url(/images/tail.png);
     background-size: 120px;
-    border: 2px solid rgba(34, 51, 34, 255);
+    border: 2px solid var(--foreground);
 }
 
 /* ========================================== SNAKE STYLING */
@@ -99,7 +104,7 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 10px 25px;
-    color: rgba(34, 51, 34, 255);
+    color: var(--foreground);
     font-weight: bold;
     font-size: 15px;
 }
@@ -107,7 +112,7 @@ html {
 /* Score value styling*/
 .player-score {
     display: flex;
-    color: rgba(34, 51, 34, 255);
+    color: var(--foreground);
 }
 
 .refreshHighScore {
@@ -121,20 +126,20 @@ html {
 }
 
 .refreshHighScore:hover {
-    color: rgba(34, 51, 34, 1); 
+    color: var(--foreground); 
     cursor: pointer;
 }
 
 .high-score {
     display: flex;
-    color: rgba(34, 51, 34, 255);
+    color: var(--foreground);
 }
 
 /* Separator for points and game  */
 .line {
     margin: auto;
     width: 90%;
-    border-bottom: 2px solid rgba(34, 51, 34, 255);
+    border-bottom: 2px solid var(--foreground);
 }
 
 #title-area {
@@ -144,7 +149,8 @@ html {
 
 #title {
     padding: 20px;
-    color: rgba(34, 51, 34, 255);
+    /* color: rgba(34, 51, 34, 255); */
+    color: var(--foreground);
 }
 
 .created {
