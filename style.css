@@ -1,6 +1,7 @@
 :root {
     --foreground: rgba(34, 51, 34, 1);
     --background: rgba(143, 179, 145, 1);
+    --snakeHead: url(./images/head.png);
   }
 
 * {
@@ -65,33 +66,33 @@ html {
 }
 .snakeHead_neutral {
     background-color: transparent;
-    background-image: url(/images/head.png);
+    background-image: var(--snakeHead);
 }
 .snakeHead_up {
     background-color: transparent;
-    background-image: url(/images/head.png);
+    background-image: var(--snakeHead);
     transform: rotate(0deg);
 }
 .snakeHead_down {
     background-color: transparent;
-    background-image: url(/images/head.png);
+    background-image: var(--snakeHead);
     transform: rotate(180deg);
 }
 .snakeHead_left {
     background-color: transparent;
-    background-image: url(/images/head.png);
+    background-image: var(--snakeHead);
     transform: rotate(-90deg);
 }
 
 .snakeHead_right {
     background-color: transparent;
-    background-image: url(/images/head.png);
+    background-image: var(--snakeHead);
     transform: rotate(90deg);
 }
 
 .tail {
     background-color: rgba(34, 51, 34, 0.5);
-    background-image: url(/images/tail.png);
+    background-image: url(./images/tail.png);
     background-size: 120px;
     border: 2px solid var(--foreground);
 }

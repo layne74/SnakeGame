@@ -261,7 +261,7 @@ function formatScore(num) {
 function randomFoodImage() {
     let idx = Math.floor(Math.random() * foodArr.length - 1) + 1;
 
-    return `url(/images/food/${foodArr[idx]})`;
+    return `url(./images/food/${foodArr[idx]})`;
 }
 
 // Function that checks for death of for win
