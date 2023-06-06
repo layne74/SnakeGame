@@ -5,8 +5,6 @@ Date: 06/01/2023
 Incomplete: true
 */
 
-// Win = 64pts
-
 let gridSize = {
     xStart: "a",
     xEnd: "g",
@@ -14,6 +12,7 @@ let gridSize = {
     xEnd: "8",
 };
 
+// Variables used in the game logic
 let snake = ["d3"];
 let direction = "";
 let lastDirection = "";
@@ -187,12 +186,13 @@ let ticker = setInterval(() => {
     tick();
 }, tickRate * 1000);
 
-// Alerts the suer of their demise, resets the game
+// Alerts the user of their demise, resets the game
 function death() {
     alert("Oh no, You died!");
     resetGame();
 }
 
+// Alerts the user of their demise, resets the game
 function win() {
     alert("Oh yes, You won!");
     resetGame();
@@ -229,7 +229,7 @@ function resetGame() {
 function setHighScore() {
     let storedHighScore = localStorage.getItem("snakeHighScore");
 
-    // If there is a highscore in storage, set it in the game
+    // If there is a "highscore" in storage, set it in the game
     if (storedHighScore) {
         highScore = storedHighScore;
     }
@@ -260,7 +260,6 @@ function formatScore(num) {
 // Picks a random index in the array of image names, returns a string url(/path/to/file)
 function randomFoodImage() {
     let idx = Math.floor(Math.random() * foodArr.length - 1) + 1;
-
     return `url(./images/food/${foodArr[idx]})`;
 }
 
@@ -270,6 +269,7 @@ function checkGameStatus() {
     if ((snake.slice(0, snake.length - 2)).includes(snake[snake.length - 1])) {
         death();
     }
+    // 64 points is the max a player can get
     if (score == 64) {
         win();
     }

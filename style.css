@@ -2,13 +2,13 @@
     --foreground: rgba(34, 51, 34, 1);
     --background: rgba(143, 179, 145, 1);
     --snakeHead: url(./images/head.png);
-  }
+}
 
 * {
     padding: 0px;
     margin: 0px;
     font-family: 'Press Start 2P', cursive;
-    text-shadow: 0 0 10px #bd7f7f2d, 0 0 20px #00310731, 0 0 42px rgba(0, 44, 4, 0.212), 0 0 82px rgba(0, 0, 0, 0.151),0 0 92px rgba(0, 0, 0, 0.26);
+    text-shadow: 0 0 10px #bd7f7f2d, 0 0 20px #00310731, 0 0 42px rgba(0, 44, 4, 0.212), 0 0 82px rgba(0, 0, 0, 0.151), 0 0 92px rgba(0, 0, 0, 0.26);
 }
 
 html {
@@ -54,7 +54,6 @@ html {
     background-image: none;
 }
 
-
 /* SNAKE STYLING =============================================*/
 
 /* Styling for the snake*/
@@ -64,20 +63,24 @@ html {
     background-position: center;
     background-size: 63px;
 }
+
 .snakeHead_neutral {
     background-color: transparent;
     background-image: var(--snakeHead);
 }
+
 .snakeHead_up {
     background-color: transparent;
     background-image: var(--snakeHead);
     transform: rotate(0deg);
 }
+
 .snakeHead_down {
     background-color: transparent;
     background-image: var(--snakeHead);
     transform: rotate(180deg);
 }
+
 .snakeHead_left {
     background-color: transparent;
     background-image: var(--snakeHead);
@@ -122,12 +125,12 @@ html {
     right: 232px;
     font-size: 23px;
     padding-right: 10px;
-    color: rgba(34, 51, 34, 0.493); 
+    color: rgba(34, 51, 34, 0.493);
     transition: color 0.15s;
 }
 
 .refreshHighScore:hover {
-    color: var(--foreground); 
+    color: var(--foreground);
     cursor: pointer;
 }
 
@@ -150,7 +153,6 @@ html {
 
 #title {
     padding: 20px;
-    /* color: rgba(34, 51, 34, 255); */
     color: var(--foreground);
 }
 
@@ -161,6 +163,7 @@ html {
     color: rgba(128, 128, 128, 0.507);
 }
 
+/* Debugging class */
 .debug {
-    border: 1px solid red;
+    border: 2px solid red;
 }
