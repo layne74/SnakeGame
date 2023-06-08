@@ -9,6 +9,7 @@
     margin: 0px;
     font-family: 'Press Start 2P', cursive;
     text-shadow: 0 0 10px #bd7f7f2d, 0 0 20px #00310731, 0 0 42px rgba(0, 44, 4, 0.212), 0 0 82px rgba(0, 0, 0, 0.151), 0 0 92px rgba(0, 0, 0, 0.26);
+    
 }
 
 html {
@@ -52,6 +53,7 @@ html {
     background-repeat: no-repeat;
     background-position: center;
     background-image: none;
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.30));
 }
 
 /* SNAKE STYLING =============================================*/
@@ -62,35 +64,41 @@ html {
     border-radius: 10px;
     background-position: center;
     background-size: 63px;
-}
-
-.snakeHead_neutral {
-    background-color: transparent;
-    background-image: var(--snakeHead);
+    box-shadow: 1px -2px 28px -6px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 1px -2px 28px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px -2px 28px -6px rgba(0, 0, 0, 0.75);
 }
 
 .snakeHead_up {
     background-color: transparent;
     background-image: var(--snakeHead);
     transform: rotate(0deg);
+    box-shadow:none;
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.55));
 }
 
 .snakeHead_down {
     background-color: transparent;
     background-image: var(--snakeHead);
     transform: rotate(180deg);
+    box-shadow:none;
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.55));
 }
 
 .snakeHead_left {
     background-color: transparent;
     background-image: var(--snakeHead);
     transform: rotate(-90deg);
+    box-shadow:none;
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.55));
 }
 
 .snakeHead_right {
     background-color: transparent;
     background-image: var(--snakeHead);
     transform: rotate(90deg);
+    box-shadow:none;
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.55));
 }
 
 .tail {
@@ -144,6 +152,7 @@ html {
     margin: auto;
     width: 90%;
     border-bottom: 2px solid var(--foreground);
+    filter: drop-shadow(1px 3px 5px rgba(0,0,0,0.55));
 }
 
 #title-area {

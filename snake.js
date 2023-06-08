@@ -52,7 +52,7 @@ function move() {
             //removes the tail from snake array
             snake.shift();
             // removes classes from the "tail"
-            document.getElementById(`${tail}`).classList.remove("tail", "snake", "snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
+            document.getElementById(`${tail}`).classList.remove("tail", "snake", "snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right");
         }
 
         // RIGHT
@@ -97,7 +97,7 @@ function move() {
         // For if the game has just started
         if (score > 0) {
             // Removes the head from the second block
-            document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right", "snakeHead_neutral");
+            document.getElementById(`${snake[snake.length - 2]}`).classList.remove("snakeHead_up", "snakeHead_down", "snakeHead_left", "snakeHead_right");
         }
 
         // Update the previous direction
@@ -208,7 +208,6 @@ function resetGame() {
             "snakeHead_down",
             "snakeHead_left",
             "snakeHead_right",
-            "snakeHead_neutral",
             "food",
             "tail"
         );
@@ -223,7 +222,7 @@ function resetGame() {
     updateScore();
 
     // Sets default position for the snake.
-    document.getElementById('d3').classList.add("snake", "snakeHead_neutral");
+    document.getElementById('d3').classList.add("snake", "snakeHead_up");
 }
 
 // Sets the high score. Stored in local storage.
