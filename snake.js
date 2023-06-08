@@ -217,6 +217,7 @@ function resetGame() {
 
     snake = ["d3"];
     direction = "";
+    lastDirection = "";
     foodItemSet = false;
     score = "000";
     updateScore();
