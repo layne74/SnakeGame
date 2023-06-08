@@ -11,7 +11,7 @@ Just a simple snake Game. Always wanted to make a Snake game with Vanilla JS. Wo
 
 Download/clone the zip file and open the index.html.
 
-If you feel that is too much effort, fair enough you can play it [here](https://snake-game-ashen.vercel.app/) on vercel.
+If you feel that is too much effort, fair enough, you can play it [here](https://snake-game-ashen.vercel.app/) on Vercel.
 
 ## How to play
 
